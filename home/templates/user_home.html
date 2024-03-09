@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+
+{% block base %}
+
+<div class="container-md text-center">welcome <b class="text-uppercase">{{ user.first_name }}</b></div>
+<div>The user group for your event users is <b>{{ user.user_group }}<b></div>
+<Br>
+{% if data %}
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Sr. No.</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Email</th>
+      <th scope="col">Action</th>
+      {% if user.is_superuser %}
+      <th>User Group</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  	{% for u in data %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{u.first_name}} {{u.last_name}}</td>
+      <td>{{u.phone_number}}</td>
+      <td>{{u.email}}</td>
+      <td>
+        <form method="POST" action="{% url 'delete_user' u.id 'yes'%}">
+          {% csrf_token %}
+        <button class="btn btn-outline-danger" type="submit">Delete</button>
+        </form>
+        
+      </td>
+      {% if user.is_superuser %}
+      <td>{{u.user_group}}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+	
+{% endif %}
+
+
+{% include 'messages.html' %}
+
+<div class="container mt-5">
+    <a href="{% url 'upload_media' %}" class="btn btn-primary btn-lg">Upload Photos & Videos</a>
+    <a href="{% url 'view_media' %}" class="btn btn-secondary btn-lg">View Photos & Videos</a>
+</div>
+
+{%endblock%}
+

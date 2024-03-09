@@ -1,0 +1,79 @@
+{% extends "base.html"%}
+
+{% block base %}
+<div class="col shadow p-3 mb-5 bg-body-tertiary rounded">
+    	<span class="border">
+		<form method="POST" action="{% url 'register_eventuser' %}">
+			{% csrf_token %}
+
+		<div class="f">	Registration </div>
+		<br>
+		 <div class="row mb-3">
+    		<legend for="text" class="col-sm-2 col-form-label">First Name</legend>
+    		<div class="col-sm-10">
+        		<input type="text" name="fname" class="form-control" id="inputPassword3" value={{data.fname}}>
+    		</div>
+    
+  		</div>
+    	<div class="row mb-3">
+    		<legend for="text" class="col-sm-2 col-form-label">Last Name</legend>
+    		<div class="col-sm-10">
+        		<input type="text" name="lname" class="form-control" id="inputPassword3" value={{data.lname}}>
+    		</div>
+    	</div>
+    	<div class="row mb-3">
+    		<legend for="text" class="col-sm-2 col-form-label">Phone Number</legend>
+    		<div class="col-sm-10">
+        		<input type="text" name="phone_number" class="form-control" id="inputPassword3" value={{data.phone_number}}>
+    		</div>
+    	</div>
+  		<div class="row mb-3">
+    		<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    		<div class="col-sm-10">
+      			<input type="email" name="email" class="form-control" id="inputEmail3" value={{data.email}}>
+    		</div>
+  		</div>
+  		<div class="row mb-3">
+    		<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    		<div class="col-sm-10">
+        		<input type="password" name="password" class="form-control" id="inputPassword3" value={{data.password}}>
+    		</div>
+   		</div>
+   		<div class="row mb-3">
+    		<label for="inputPassword3" class="col-sm-2 col-form-label">Event code</label>
+    		<div class="col-sm-10">
+        		<input type="text" name="event_code" class="form-control" id="inputPassword3" value={{data.event_code}}>
+    		</div>
+   		</div>
+   		{% if sent_code %}
+   		<div class="row mb-3">
+    		<label for="inputPassword3" class="col-sm-2 col-form-label">Verification_code</label>
+    		<div class="col-sm-10">
+        		<input type="text" name="v_code" class="form-control" id="inputPassword3" >
+    		</div>
+   		</div>
+   		{%endif%}
+  		{% include 'messages.html' %}
+    	<button type="submit" class="btn btn-primary">Register</button>
+    	</form>
+    	{% if resend_password %}
+    	<form method="POST" action="{% url 'resend_otp_s' %}">
+        {% csrf_token %}
+            <input type="hidden" name="fname" class="form-control" id="inputPassword3" value={{data.fname}}>
+       
+            <input type="hidden" name="lname" class="form-control" id="inputPassword3" value={{data.lname}}>
+    
+            <input type="hidden" name="phone_number" class="form-control" id="inputPassword3" value={{data.phone_number}}>
+   
+          <input type="hidden" name="email" class="form-control" id="inputEmail3" value={{data.email}}>
+
+          <input type="hidden" name="event_code" class="form-control" id="inputPassword3" value={{data.event_code}}>
+ 
+            <input type="hidden" name="password" class="form-control" id="inputPassword3" value={{data.password}}>
+       
+      <button type="submit" name="submit1" class="btn btn-primary" value = "Resend_otp">Resend OTP </button>
+      </form>
+      {% endif %}
+    	</span>
+    </div>
+{%endblock%}

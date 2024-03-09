@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+
+{% block base %}
+<div class="container mt-5">
+    {% include 'messages.html' %}
+    <a href="{% url 'upload_media' %}" class="btn btn-primary btn-lg">Upload Photos & Videos</a>
+    <a href="{% url 'view_media' %}" class="btn btn-secondary btn-lg">View Photos & Videos</a>
+</div>
+
+{%endblock%}

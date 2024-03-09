@@ -1,0 +1,15 @@
+<!-- myapp/templates/upload_media.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Upload Wedding Media - My Wedding{% endblock %}
+
+{% block base %}
+    <div class="container mt-5">
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Upload Successful!</h4>
+      <p>Your Memories has been successfully uploaded.</p>
+      <p>please click on <a class="navbar-brand" href="{% url 'view_media' %}">See Memories</a> to view the uploaded images/videos or <a class="navbar-brand" href="{% url 'subuser_home' %}">Home</a> to go back to starting page<p>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html"%}
+{% block base %}
+
+<div class="container text-center">
+	 
+	<span class="border">
+		<form method="POST" action="{% url 'login_eventuser' %}">
+			{% csrf_token %}
+			
+		<div class="f">	Login</div>
+		<br>
+  		<div class="row mb-3">
+    		<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+    		<div class="col-sm-10">
+      			<input type="email" name="email" class="form-control" id="inputEmail3" value={{data.email}}>
+    		</div>
+  		</div>
+  		<div class="row mb-3">
+    		<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+    		<div class="col-sm-10">
+        		<input type="password" name="password" class="form-control" id="inputPassword3">
+    		</div>
+  		{% include 'messages.html' %}
+  		</div>
+
+    	<button type="submit" class="btn btn-primary">Login</button>
+    	</form>
+    	<p> If new user please, go to <a href="{% url 'index' %}">home</a> page for registration</p>
+    	<p> If here for uploading memories(photos,videos), please go to the ongoing events section and login from there or get the login link from your event owner.</p>
+    	</span>
+</div>
+{% endblock %}
